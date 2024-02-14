@@ -2,7 +2,7 @@ import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import IndexPage from "./pages/IndexPage";
 import ProductPage from "./pages/ProductPage";
-import Template from "./components/Template";
+import Template from "./components/Common/Template";
 
 const router = createBrowserRouter([
   {
