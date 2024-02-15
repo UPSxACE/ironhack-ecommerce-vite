@@ -6,3 +6,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --main-black: #282828;
+}
