@@ -4,7 +4,7 @@ export default function Cta() {
   return (
     <section
       id="cta"
-      className="bg-[var(--main-black)] text-white px-20 py-12 grid grid-cols-[60%_auto] gap-12 rounded-[1.1rem]"
+      className="bg-mainBlack text-white px-20 py-12 grid grid-cols-[60%_auto] gap-12 rounded-[1.1rem]"
     >
       <div className="flex flex-col justify-between">
         <h1 className="text-6xl font-bold">
@@ -27,14 +27,14 @@ export default function Cta() {
             className="h-full flex-1 pr-3 outline-none text-xl"
             placeholder="What are you looking for?"
           />
-          <div className="h-[2.75rem] w-[2.75rem] p-[0.5rem] bg-[var(--main-black)] rounded-xl">
+          <div className="h-[2.75rem] w-[2.75rem] p-[0.5rem] bg-mainBlack rounded-xl">
             <IoSearch className="h-full w-full  fill-white" />
           </div>
         </div>
       </div>
       <div className="flex justify-end">
         <img
-          src="/public/cta-image.png"
+          src="/cta-image.png"
           className="max-h-[400px]"
           alt="Trendy product"
         />
