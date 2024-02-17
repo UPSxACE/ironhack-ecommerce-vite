@@ -8,29 +8,34 @@ export default function Template() {
 
   return (
     <div>
-      <header className="flex justify-between border-b h-[50px] items-center">
-        <h2 className="font-semibold ml-4">IronTech</h2>
-        <nav className="flex gap-12">
-          <NavLink to={"/"}>
-            <p>Home</p>
-          </NavLink>
-          <NavLink to={"/products"}>
-            <p>Products</p>
-          </NavLink>
-          <NavLink to={"/sign-in"}>
-            <p>Sign In</p>
-          </NavLink>
-          <NavLink to={"/sign-up"}>
-            <p>Sign Up</p>
-          </NavLink>
-        </nav>
-        <div className="flex mr-5 gap-5 items-centerx">
-          <IoHeartOutline></IoHeartOutline>
-          <PiShoppingCartThin></PiShoppingCartThin>
+      <header className="flex justify-center border-b">
+        <div className="flex justify-between h-[49px] items-center max-w-screen-lg w-full">
+          <h2 className="font-semibold">IronTech</h2>
+          <nav className="flex gap-12">
+            <NavLink to={"/"}>
+              <p>Home</p>
+            </NavLink>
+            <NavLink to={"/products"}>
+              <p>Products</p>
+            </NavLink>
+            <NavLink to={"/sign-in"}>
+              <p>Sign In</p>
+            </NavLink>
+            <NavLink to={"/sign-up"}>
+              <p>Sign Up</p>
+            </NavLink>
+          </nav>
+          <div className="flex gap-5 items-center text-xl">
+            <IoHeartOutline></IoHeartOutline>
+            <PiShoppingCartThin></PiShoppingCartThin>
+          </div>
         </div>
       </header>
-
-      <Outlet />
+      <div className="min-h-[calc(100vh-50px)] px-12 py-4 flex flex-col items-center">
+        <div className="max-w-screen-lg w-full flex-1 flex flex-col">
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }
