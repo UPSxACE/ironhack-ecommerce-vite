@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
@@ -10,7 +10,7 @@ export default function Template() {
     <div>
       <header className="flex justify-center border-b">
         <div className="flex justify-between h-[49px] items-center max-w-screen-lg w-full">
-          <h2 className="font-semibold">IronTech</h2>
+          <Link className="font-semibold">IronTech</Link>
           <nav className="flex gap-12">
             <NavLink to={"/"}>
               <p>Home</p>
