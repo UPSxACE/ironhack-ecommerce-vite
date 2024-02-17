@@ -1,11 +1,11 @@
 import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import IndexPage from "./pages/IndexPage";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
+
+import ProductPage from "./pages/ProductPage";
 import Template from "./components/Template";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import ProductsPage from "./pages/ProductsPage";
 
 const router = createBrowserRouter([
   {
