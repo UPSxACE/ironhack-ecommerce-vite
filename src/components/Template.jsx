@@ -2,6 +2,7 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
+import { CiMenuBurger } from "react-icons/ci"
 
 export default function Template() {
   let location = useLocation();
@@ -11,7 +12,9 @@ export default function Template() {
       <header className="flex justify-center border-b">
         <div className="flex justify-between h-[49px] items-center max-w-screen-lg w-full">
           <Link className="font-semibold">IronTech</Link>
-          <nav className="flex gap-12">
+            <CiMenuBurger className="flex sm:hidden">
+            </CiMenuBurger>
+          <nav className="hidden gap-12 sm:flex">
             <NavLink to={"/"}>
               <p>Home</p>
             </NavLink>
