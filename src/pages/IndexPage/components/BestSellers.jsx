@@ -21,13 +21,17 @@ export default function BestSellers() {
         {/* <Button Icon={FaArrowRightLong}>See more</Button> */}
       </article>
 
-      <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-2 flex-wrap lg:flex-nowrap justify-center lg:justify-between">
+      <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-4 flex-wrap lg:flex-nowrap justify-around lg:justify-between">
         <ProductPreview
           imageUrl={"/examples/product-img.png"}
           title={"Product Title"}
           price={"123.23"}
           rating={4}
           ratingCount={88}
+          linkClass={"max-sm:w-full max-sm:h-auto"}
+          articleClass={"max-sm:w-full max-sm:h-auto"}
+          imageWrapperClass={"w-full h-auto"}
+          imageClass={"max-h-[320px]"}
         />
         <ProductPreview
           imageUrl={"/examples/product-img.png"}
@@ -35,6 +39,10 @@ export default function BestSellers() {
           price={"123.23"}
           rating={4}
           ratingCount={88}
+          linkClass={"max-sm:w-full max-sm:h-auto"}
+          articleClass={"max-sm:w-full max-sm:h-auto"}
+          imageWrapperClass={"w-full h-auto"}
+          imageClass={"max-h-[320px]"}
         />
         <ProductPreview
           imageUrl={"/examples/product-img.png"}
@@ -42,6 +50,10 @@ export default function BestSellers() {
           price={"123.23"}
           rating={4}
           ratingCount={88}
+          linkClass={"max-sm:w-full max-sm:h-auto"}
+          articleClass={"max-sm:w-full max-sm:h-auto"}
+          imageWrapperClass={"w-full h-auto"}
+          imageClass={"max-h-[320px]"}
         />
       </div>
     </section>

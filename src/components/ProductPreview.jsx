@@ -7,12 +7,19 @@ export default function ProductPreview({
   rating,
   ratingCount,
   imageUrl,
+  linkClass,
+  articleClass,
+  imageWrapperClass,
+  imageClass,
 }) {
   return (
-    <Link to={"/"}>
-      <article className="flex flex-col gap-1 w-[240px]">
-        <div className="bg-gray-100 w-[240px] h-[240px]">
-          <img src={imageUrl} className="w-full h-full" />
+    <Link to={"/"} className={linkClass}>
+      <article className={"flex flex-col gap-1 w-[240px] " + articleClass}>
+        <div className={"bg-gray-100 w-[240px] h-[240px] " + imageWrapperClass}>
+          <img
+            src={imageUrl}
+            className={"w-full h-full object-cover " + imageClass}
+          />
         </div>
         <h1 className="font-medium mt-2">{title}</h1>
         <span className="text-red-600 font-medium">${price}</span>
