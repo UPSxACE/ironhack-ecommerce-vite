@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import StaticRating from "./StaticRating/StaticRating";
 
 export default function ProductPreview({
+  id,
   title,
   price,
   rating,

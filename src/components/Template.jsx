@@ -3,17 +3,26 @@ import { NavLink } from "react-router-dom";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
 import { CiMenuBurger } from "react-icons/ci";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Template() {
   let location = useLocation();
   function activeClass({ isActive, isPending }) {
-    return   isPending ? "pending" : isActive ? "underline underline-offset-2": ""
+    return isPending
+      ? "pending p-2"
+      : isActive
+      ? "underline underline-offset-2 p-2"
+      : "p-2";
   }
 
   return (
     <div>
-      <header className="flex justify-center border-b">
+      <header className="flex justify-center border-b px-4 sm:px-6 md:px-12">
         <div className="flex justify-between h-[49px] items-center max-w-screen-lg w-full">
           <Link className="font-semibold">IronTech</Link>
           <nav className="hidden gap-12 sm:flex">
@@ -38,26 +47,26 @@ export default function Template() {
               <CiMenuBurger></CiMenuBurger>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="sm:hidden">
-              <DropdownMenuItem>
-                <NavLink to={"/"}>
+              <NavLink to={"/"}>
+                <DropdownMenuItem className={"hover:cursor-pointer"}>
                   <span>Home</span>
-                </NavLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <NavLink to={"/products"}>
+                </DropdownMenuItem>
+              </NavLink>
+              <NavLink to={"/products"}>
+                <DropdownMenuItem className={"hover:cursor-pointer"}>
                   <span>Products</span>
-                </NavLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <NavLink to={"/sign-in"}>
+                </DropdownMenuItem>
+              </NavLink>
+              <NavLink to={"/sign-in"}>
+                <DropdownMenuItem className={"hover:cursor-pointer"}>
                   <span>Sign In</span>
-                </NavLink>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <NavLink to={"/sign-up"}>
+                </DropdownMenuItem>
+              </NavLink>
+              <NavLink to={"/sign-up"}>
+                <DropdownMenuItem className={"hover:cursor-pointer"}>
                   <span>Sign Up</span>
-                </NavLink>
-              </DropdownMenuItem>
+                </DropdownMenuItem>
+              </NavLink>
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
