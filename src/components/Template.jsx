@@ -31,7 +31,7 @@ export default function Template() {
           </div>
         </div>
       </header>
-      <div className="min-h-[calc(100vh-50px)] px-12 py-4 flex flex-col items-center">
+      <div className="min-h-[calc(100vh-50px)] px-4 py-4 sm:px-6 sm:py-6  md:px-12 md:py-4 flex flex-col items-center">
         <div className="max-w-screen-lg w-full flex-1 flex flex-col">
           <Outlet />
         </div>
