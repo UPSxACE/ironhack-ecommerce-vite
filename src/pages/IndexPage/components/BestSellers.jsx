@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 // import Button from "../../../components/Button";
-import { FaArrowRightLong } from "react-icons/fa6";
-import { Button } from "@/components/ui/button";
 import ProductPreview from "@/components/ProductPreview";
+import { Button } from "@/components/ui/button";
+import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function BestSellers() {
   return (
@@ -23,6 +23,7 @@ export default function BestSellers() {
 
       <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-4 flex-wrap lg:flex-nowrap justify-around lg:justify-between">
         <ProductPreview
+        id={1}
           imageUrl={"/examples/product-img.png"}
           title={"Product Title"}
           price={"123.23"}
@@ -34,6 +35,7 @@ export default function BestSellers() {
           imageClass={"max-h-[320px]"}
         />
         <ProductPreview
+        id={1}
           imageUrl={"/examples/product-img.png"}
           title={"Product Title"}
           price={"123.23"}
@@ -45,6 +47,7 @@ export default function BestSellers() {
           imageClass={"max-h-[320px]"}
         />
         <ProductPreview
+        id={1}
           imageUrl={"/examples/product-img.png"}
           title={"Product Title"}
           price={"123.23"}

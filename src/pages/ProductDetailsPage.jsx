@@ -17,17 +17,17 @@ export default function ProductDetailsPage() {
         id="product-details"
         className="grid gap-2 sm:gap-4 md:gap-8 grid-cols-1 sm:grid-cols-2"
       >
-        <img src="/examples/product-img.png" className="h-auto" />
+        <img src="/examples/product-img.png" className="h-auto bg-gray-100" />
         <article className="flex flex-col gap-4 sm:gap-5">
           <header className="flex flex-col gap-1">
-            <h1 className="text-2xl font-bold">Product Title</h1>
+            <h1 className="text-2xl lg:text-4xl font-bold">Product Title</h1>
             <div className="flex gap-2 flex-wrap">
               <StaticRating rating={4} />
               <span className="font-medium text-gray-500">(150 Reviews)</span>
             </div>
-            <span className="text-2xl">$190.32</span>
+            <span className="text-2xl lg:text-3xl">$190.32</span>
           </header>
-          <p className="">
+          <p className="text-lg">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             convallis nisl a risus congue blandit. Ut eget mattis diam. Duis
             nibh nisl, volutpat sed euismod at, vestibulum vitae odio.
