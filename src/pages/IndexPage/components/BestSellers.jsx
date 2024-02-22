@@ -2,9 +2,22 @@ import { Link } from "react-router-dom";
 // import Button from "../../../components/Button";
 import ProductPreview from "@/components/ProductPreview";
 import { Button } from "@/components/ui/button";
+import useGetRequest from "@/hooks/use-get-request";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 export default function BestSellers() {
+  const {
+    result: products,
+    done,
+    error,
+  } = useGetRequest("/products", {
+    _page: 1,
+    _limit: 3,
+    _embed: "rates",
+    _sort: "purchases",
+    _order: "desc",
+  });
+
   return (
     <section id="best-sellers" className="flex mt-8 flex-wrap lg:flex-nowrap">
       <article className="flex flex-col gap-4 basis-full lg:basis-0 lg:flex-1 pr-0 lg:pr-4">
@@ -22,42 +35,35 @@ export default function BestSellers() {
       </article>
 
       <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-4 flex-wrap lg:flex-nowrap justify-around lg:justify-between">
-        <ProductPreview
-        id={1}
-          imageUrl={"/examples/product-img.png"}
-          title={"Product Title"}
-          price={"123.23"}
-          rating={4}
-          ratingCount={88}
-          linkClass={"max-sm:w-full max-sm:h-auto"}
-          articleClass={"max-sm:w-full max-sm:h-auto"}
-          imageWrapperClass={"w-full h-auto"}
-          imageClass={"max-h-[320px]"}
-        />
-        <ProductPreview
-        id={1}
-          imageUrl={"/examples/product-img.png"}
-          title={"Product Title"}
-          price={"123.23"}
-          rating={4}
-          ratingCount={88}
-          linkClass={"max-sm:w-full max-sm:h-auto"}
-          articleClass={"max-sm:w-full max-sm:h-auto"}
-          imageWrapperClass={"w-full h-auto"}
-          imageClass={"max-h-[320px]"}
-        />
-        <ProductPreview
-        id={1}
-          imageUrl={"/examples/product-img.png"}
-          title={"Product Title"}
-          price={"123.23"}
-          rating={4}
-          ratingCount={88}
-          linkClass={"max-sm:w-full max-sm:h-auto"}
-          articleClass={"max-sm:w-full max-sm:h-auto"}
-          imageWrapperClass={"w-full h-auto"}
-          imageClass={"max-h-[320px]"}
-        />
+        {done &&
+          !error &&
+          products.map((product) => {
+            const rateCount = product?.rates ? product.rates.length : 0;
+            const rateSum =
+              rateCount > 0
+                ? product.rates.reduce(
+                    (accRate, currRate) => accRate + currRate.rating,
+                    0
+                  )
+                : 0;
+            const rateAverage = Math.floor(rateSum / rateCount);
+
+            return (
+              <ProductPreview
+                key={product.id}
+                id={product.id}
+                imageUrl={product.image}
+                title={product.title}
+                price={product.price}
+                rating={rateAverage}
+                ratingCount={rateCount}
+                linkClass={"max-sm:w-full max-sm:h-auto"}
+                articleClass={"max-sm:w-full max-sm:h-auto"}
+                imageWrapperClass={"w-full h-auto"}
+                imageClass={"max-h-[320px]"}
+              />
+            );
+          })}
       </div>
     </section>
   );
