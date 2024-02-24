@@ -1,17 +1,15 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import { IoHeartOutline } from "react-icons/io5";
-import { PiShoppingCartThin } from "react-icons/pi";
-import { CiMenuBurger } from "react-icons/ci";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { CiMenuBurger } from "react-icons/ci";
+import { IoHeartOutline } from "react-icons/io5";
+import { PiShoppingCartThin } from "react-icons/pi";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 export default function Template() {
-  let location = useLocation();
   function activeClass({ isActive, isPending }) {
     return isPending
       ? "pending p-2"

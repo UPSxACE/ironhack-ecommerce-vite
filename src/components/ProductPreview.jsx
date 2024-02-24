@@ -14,7 +14,7 @@ export default function ProductPreview({
   imageClass,
 }) {
   return (
-    <Link to={"/"} className={linkClass}>
+    <Link to={"/product/" + id} className={linkClass}>
       <article className={"flex flex-col gap-1 w-[240px] " + articleClass}>
         <div className={"bg-gray-100 w-[240px] h-[240px] " + imageWrapperClass}>
           <img
