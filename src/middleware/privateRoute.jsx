@@ -3,4 +3,5 @@ export default async function guestRoute() {
   if (!token) {
     return Response.redirect("/", 401);
   }
+  return null;
 }

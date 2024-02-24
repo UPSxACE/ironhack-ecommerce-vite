@@ -3,6 +3,7 @@ import "./App.css";
 
 import Template from "./components/Template";
 import guestRoute from "./middleware/guestRoute";
+import logout from "./middleware/logout";
 import AdminPage from "./pages/AdminPage";
 import IndexPage from "./pages/IndexPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <Template />,
     children: [
+      {
+        path: "logout",
+        loader: logout,
+      },
       {
         element: <IndexPage />,
         path: "",

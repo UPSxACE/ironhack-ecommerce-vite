@@ -3,4 +3,5 @@ export default async function guestRoute() {
   if (token) {
     return Response.redirect("/", 302);
   }
+  return null;
 }
