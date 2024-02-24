@@ -1,13 +1,14 @@
-import "./App.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
+import "./App.css";
 
 import Template from "./components/Template";
+import guestRoute from "./middleware/guestRoute";
+import AdminPage from "./pages/AdminPage";
+import IndexPage from "./pages/IndexPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import IndexPage from "./pages/IndexPage";
-import ProductsPage from "./pages/ProductsPage";
 
 const router = createBrowserRouter([
   {
@@ -25,16 +26,22 @@ const router = createBrowserRouter([
       {
         path: "sign-in",
         element: <SignInPage />,
+        loader: guestRoute,
       },
       {
         path: "sign-up",
         element: <SignUpPage />,
+        loader: guestRoute,
       },
       {
         path: "products",
         element: <ProductsPage />,
       },
     ],
+  },
+  {
+    path: "/admin",
+    element: <AdminPage />,
   },
 ]);
 

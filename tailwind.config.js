@@ -17,6 +17,9 @@ module.exports = {
       },
     },
     extend: {
+      transitionDuration: {
+        400: "400ms",
+      },
       screens: {
         xs: "450px",
       },
