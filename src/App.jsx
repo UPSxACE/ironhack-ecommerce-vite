@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import {useState} from "react"
 
 import Template from "./components/Template";
 import adminRoute from "./middleware/adminRoute";
@@ -11,6 +12,7 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
+import ProductsCategoryPage from "./pages/ProductsCategoryPage";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,10 @@ const router = createBrowserRouter([
         path: "products",
         element: <ProductsPage />,
       },
+      {
+        path: "products/:id",
+        element: <ProductsCategoryPage />
+      }
     ],
   },
   {
@@ -52,7 +58,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-function App() {
+function App() {  
+
   return <RouterProvider router={router} />;
 }
 
