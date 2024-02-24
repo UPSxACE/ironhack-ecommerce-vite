@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 
 import Template from "./components/Template";
+import adminRoute from "./middleware/adminRoute";
 import guestRoute from "./middleware/guestRoute";
 import logout from "./middleware/logout";
 import AdminPage from "./pages/AdminPage";
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <AdminPage />,
+    loader: adminRoute,
   },
 ]);
 

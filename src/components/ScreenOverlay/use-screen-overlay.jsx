@@ -25,7 +25,6 @@ export default function useScreenOverlay(initOpen) {
   }, [transitionState]);
 
   useEffect(() => {
-    console.log("unmount");
     // restore scroll on unMount
     return () => {
       const scrollY = document.body.style.top;

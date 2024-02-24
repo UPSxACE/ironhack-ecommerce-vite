@@ -11,6 +11,7 @@ export default function BestSellers() {
     done,
     error,
   } = useGetRequest("/products", {
+    userId: import.meta.env.VITE_STORE_OWNER_ID,
     _page: 1,
     _limit: 3,
     _embed: "rates",

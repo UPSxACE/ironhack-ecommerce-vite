@@ -29,11 +29,21 @@ export default function useGetRequest(route, queryParams) {
     // remove '/' if the route string starts with it
     const routeFixed = route.startsWith("/") ? route.slice(1) : route;
 
+    const token = localStorage.getItem("accessToken");
+    const config = token
+      ? {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      : null;
+
     axios
       .get(
         "http://localhost:3000/" +
           routeFixed +
-          buildQueryParamsString(queryParamsRef.current)
+          buildQueryParamsString(queryParamsRef.current),
+        config
       )
       .then((res) => {
         setDone(true);
