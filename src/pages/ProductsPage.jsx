@@ -5,6 +5,7 @@ import axios from "axios";
 import ProductPreview from "@/components/ProductPreview";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import useGetRequest from "@/hooks/use-get-request";
 
 function ProductsPage() {
   const [ProductsCategory1, setProductsCategory1] = useState(null);
@@ -12,22 +13,13 @@ function ProductsPage() {
   const [ProductsCategory3, setProductsCategory3] = useState(null);
   const [ProductsCategory4, setProductsCategory4] = useState(null);
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/category/1?_embed=products")
-      .then((results) => {
-        console.log(results, "results here");
-        setProductsCategory1(results.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const {done, error, result} = useGetRequest("/categories/1", {userId: import.meta.env.VITE_STORE_OWNER_ID, _embed: "products"})
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/category/2?_embed=products")
+      .get("http://localhost:3000/categories/2?_embed=products")
       .then((results) => {
+        console.log(results, 'here results')
         setProductsCategory2(results.data);
       })
       .catch((err) => {
@@ -37,7 +29,7 @@ function ProductsPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/category/3?_embed=products")
+      .get("http://localhost:3000/categories/3?_embed=products")
       .then((results) => {
         setProductsCategory3(results.data);
       })
@@ -48,7 +40,7 @@ function ProductsPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/category/4?_embed=products")
+      .get("http://localhost:3000/categories/4?_embed=products")
       .then((results) => {
         setProductsCategory4(results.data);
       })
@@ -62,14 +54,14 @@ function ProductsPage() {
     <div className="flex flex-col gap-y-4">
       <div className="flex flex-col gap-3">
         <div className="flex justify-between">
-          <h1 className="font-bold text-lg">{ProductsCategory1?.name}</h1>
+          <h1 className="font-bold text-lg">{result?.name}</h1>
           <Button asChild className="bg-mainBlack text-lg">
-            <Link to={`${ProductsCategory1?.id}`}>View All</Link>
+            <Link to={`${result?.id}`}>View All</Link>
           </Button>
         </div>
         <div className="flex gap-3 justify-between flex-wrap lg:flex-nowrap">
-          {ProductsCategory1?.products?.slice(0, 4).map((product, index) => {
-            return <ProductPreview key={index} imageUrl={product.image} title={product.title} price={product.price} />;
+          {result?.products?.slice(0, 4).map((product, index) => {
+            return <ProductPreview key={index} id={product.id} imageUrl={product.image} title={product.title} price={product.price} />;
           })}
         </div>
       </div>
@@ -83,7 +75,7 @@ function ProductsPage() {
         </div>
         <div className="flex gap-3 justify-between flex-wrap lg:flex-nowrap">
           {ProductsCategory2?.products?.slice(0, 4).map((product, index) => {
-            return <ProductPreview key={index} imageUrl={product.image} title={product.title} price={product.price} />;
+            return <ProductPreview key={index} id={product.id} imageUrl={product.image} title={product.title} price={product.price} />;
           })}
         </div>
       </div>
@@ -97,7 +89,7 @@ function ProductsPage() {
         </div>
         <div className="flex gap-3 justify-between flex-wrap lg:flex-nowrap">
           {ProductsCategory3?.products?.slice(0, 4).map((product, index) => {
-            return <ProductPreview key={index} imageUrl={product.image} title={product.title} price={product.price} />;
+            return <ProductPreview key={index} id={product.id} imageUrl={product.image} title={product.title} price={product.price} />;
           })}
         </div>
       </div>
@@ -111,7 +103,7 @@ function ProductsPage() {
         </div>
         <div className="flex gap-3 justify-between flex-wrap lg:flex-nowrap">
           {ProductsCategory4?.products?.slice(0, 4).map((product, index) => {
-            return <ProductPreview key={index} imageUrl={product.image} title={product.title} price={product.price} />;
+            return <ProductPreview key={index} id={product.id} imageUrl={product.image} title={product.title} price={product.price} />;
           })}
         </div>
       </div>

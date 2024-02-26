@@ -26,40 +26,22 @@ export default function ProductDetailsPage() {
   const categoryName = (done && product?.category?.name) || "";
 
   const rateCount = product?.rates ? product.rates.length : 0;
-  const rateSum =
-    rateCount > 0
-      ? product.rates.reduce(
-          (accRate, currRate) => accRate + currRate.rating,
-          0
-        )
-      : 0;
+  const rateSum = rateCount > 0 ? product.rates.reduce((accRate, currRate) => accRate + currRate.rating, 0) : 0;
   const rateAverage = Math.floor(rateSum / rateCount);
 
   return (
     <div>
-      <Breadcrumbs
-        className={"mb-3 text-lg"}
-        text={"Store / " + categoryName}
-      />
-      <section
-        id="product-details"
-        className="grid gap-2 sm:gap-4 md:gap-8 grid-cols-1 sm:grid-cols-2"
-      >
+      <Breadcrumbs className={"mb-3 text-lg"} text={"Store / " + categoryName} />
+      <section id="product-details" className="grid gap-2 sm:gap-4 md:gap-8 grid-cols-1 sm:grid-cols-2">
         <img src={product?.image || ""} className="h-auto bg-gray-100" />
         <article className="flex flex-col gap-4 sm:gap-5">
           <header className="flex flex-col gap-1">
-            <h1 className="text-2xl lg:text-4xl font-bold">
-              {product?.title || ""}
-            </h1>
+            <h1 className="text-2xl lg:text-4xl font-bold">{product?.title || ""}</h1>
             <div className="flex gap-2 flex-wrap">
               <StaticRating rating={rateAverage} />
-              <span className="font-medium text-gray-500">
-                ({rateCount} Reviews)
-              </span>
+              <span className="font-medium text-gray-500">({rateCount} Reviews)</span>
             </div>
-            <span className="text-2xl lg:text-3xl">
-              ${product?.price || ""}
-            </span>
+            <span className="text-2xl lg:text-3xl">${product?.price || ""}</span>
           </header>
           <p className="text-lg">{product?.description || ""}</p>
           <hr className="border-black" />
@@ -67,23 +49,11 @@ export default function ProductDetailsPage() {
             <NumberInput className="w-full shrink-0 basis-full xs:basis-0" />
             <Button className="flex-1 bg-mainBlack">Add to Cart</Button>
             {favorite ? (
-              <Button
-                className={
-                  "flex-1 border border-red-600 xs:max-w-10 p-[0.6rem]"
-                }
-                variant="outline"
-                onClick={() => setFavorite(!favorite)}
-              >
+              <Button className={"flex-1 border border-red-600 xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={() => setFavorite(!favorite)}>
                 <HeartIcon fill={"red"} color="red" />
               </Button>
             ) : (
-              <Button
-                className={
-                  "flex-1 border border-mainBlack xs:max-w-10 p-[0.6rem]"
-                }
-                variant="outline"
-                onClick={() => setFavorite(!favorite)}
-              >
+              <Button className={"flex-1 border border-mainBlack xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={() => setFavorite(!favorite)}>
                 <HeartIcon />
               </Button>
             )}
@@ -93,9 +63,7 @@ export default function ProductDetailsPage() {
               <TbTruckDelivery strokeWidth={1} />
               <div>
                 <h2 className="text-lg font-medium">Free Delivery</h2>
-                <p className="underline underline-offset-1 text-base font-medium">
-                  Enter your postal code for Delivery Availability
-                </p>
+                <p className="underline underline-offset-1 text-base font-medium">Enter your postal code for Delivery Availability</p>
               </div>
             </article>
             <article className="flex-1 min-h-[64px] flex items-center p-5 text-6xl gap-4">

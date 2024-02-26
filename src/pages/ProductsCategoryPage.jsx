@@ -11,7 +11,7 @@ function ProductsCategoryPage() {
   const [productCategory, setProductCategory] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/category/${id}?_embed=products`).then((res) => {
+    axios.get(`http://localhost:3000/categories/${id}?_embed=products`).then((res) => {
       console.log(res);
       setProductCategory(res.data);
     });
@@ -31,7 +31,7 @@ function ProductsCategoryPage() {
       </div>
       <div className="flex flex-wrap justify-between gap-3">
         {productCategory?.products?.map((product, index) => {
-          return <ProductPreview key={index} imageUrl={product.image} title={product.title} price={product.price} />;
+          return <ProductPreview key={index} id={product.id} imageUrl={product.image} title={product.title} price={product.price} />;
         })}
       </div>
     </div>

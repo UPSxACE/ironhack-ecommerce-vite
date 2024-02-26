@@ -1,23 +1,22 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export default function Template() {
-  function activeClass({ isActive, isPending }) {
-    return isPending
-      ? "pending p-2"
-      : isActive
-      ? "underline underline-offset-2 p-2"
-      : "p-2";
-  }
+  const [loggedIn, setLoggedin] = useState(Boolean(localStorage.getItem("accessToken")));
 
+  const location = useLocation();
+  useEffect(() => {
+    setLoggedin(Boolean(localStorage.getItem("accessToken")));
+  }, [location]);
+
+  function activeClass({ isActive, isPending }) {
+    return isPending ? "pending p-2" : isActive ? "underline underline-offset-2 p-2" : "p-2";
+  }
+  
   return (
     <div>
       <header className="flex justify-center border-b px-4 sm:px-6 md:px-12">
@@ -32,13 +31,20 @@ export default function Template() {
               <span>Products</span>
             </NavLink>
 
-            <NavLink to={"/sign-in"} className={activeClass}>
-              <span>Sign In</span>
-            </NavLink>
-
-            <NavLink to={"/sign-up"} className={activeClass}>
-              <span>Sign Up</span>
-            </NavLink>
+            {loggedIn ? (
+              <NavLink to={"/logout"} className={activeClass}>
+                <span>Sign Out</span>{" "}
+              </NavLink>
+            ) : (
+              <>
+                <NavLink to={"/sign-in"} className={activeClass}>
+                  <span>Sign In</span>
+                </NavLink>
+                <NavLink to={"/sign-up"} className={activeClass}>
+                  <span>Sign Up</span>
+                </NavLink>
+              </>
+            )}
           </nav>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex sm:hidden p-2">
