@@ -7,50 +7,36 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useGetRequest from "@/hooks/use-get-request.jsx";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { columns } from "./columns.jsx";
+import { useState } from "react";
 
-const data = [
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-  {},
-];
+export default function ProductsTable({ dataUrl }) {
+  const [sorting, setSorting] = useState([]);
 
-export default function ProductsTable() {
+  const { result, done, error } = useGetRequest(dataUrl);
+  const data = done && !error ? result : [];
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    initialState: { pagination: { pageSize: 7 } },
+    initialState: { pagination: { pageSize: 6 } },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   });
+
   return (
     <div className="w-full">
       <div className="rounded-md border">

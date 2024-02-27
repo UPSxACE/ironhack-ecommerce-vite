@@ -21,6 +21,10 @@ export default function AdminPage() {
     }, 300);
   }, []);
 
+  const dataUrl = `products?userId=${
+    import.meta.env.VITE_STORE_OWNER_ID
+  }&categoryId=${activeTab + 1}&_embed=rates&_sort=id&_order=asc`;
+
   return (
     <div className="min-h-screen flex items-stretch">
       <ScreenOverlay {...overlay} notCloseable>
@@ -38,8 +42,7 @@ export default function AdminPage() {
       <Separator orientation="vertical" className="h-auto" />
       <div className="flex flex-col flex-1 p-12">
         <button>Click me</button>
-
-        <ProductsTable />
+        <ProductsTable dataUrl={dataUrl} />
       </div>
     </div>
   );
