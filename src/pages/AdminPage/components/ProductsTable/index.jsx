@@ -63,11 +63,12 @@ export default function ProductsTable({ dataUrl }) {
           }
           className="max-w-sm"
         />
+        <Button variant="outline" className="ml-auto mr-2">
+          Create
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns
-            </Button>
+            <Button variant="outline">Columns</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             {table
