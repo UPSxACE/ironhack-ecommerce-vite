@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import {useState} from "react"
 
 import Template from "./components/Template";
 import adminRoute from "./middleware/adminRoute";
@@ -9,10 +8,10 @@ import logout from "./middleware/logout";
 import AdminPage from "./pages/AdminPage";
 import IndexPage from "./pages/IndexPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ProductsCategoryPage from "./pages/ProductsCategoryPage";
 import ProductsPage from "./pages/ProductsPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import ProductsCategoryPage from "./pages/ProductsCategoryPage";
 
 const router = createBrowserRouter([
   {
