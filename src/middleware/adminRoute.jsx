@@ -13,7 +13,6 @@ export default async function adminRoute() {
         },
       }
     : null;
-    
 
   let response;
   let error;
@@ -31,6 +30,9 @@ export default async function adminRoute() {
     });
 
   if (error) {
+    if (error?.response?.status === 401) {
+      return Response.redirect("/logout", 302);
+    }
     return Response.redirect("/", 302);
   }
 

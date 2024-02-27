@@ -4,6 +4,7 @@ import useOverlay from "@/components/ScreenOverlay/use-screen-overlay";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import ProductsTable from "./components/ProductsTable";
 import Tabs from "./components/Tabs";
 
 export default function AdminPage() {
@@ -35,8 +36,10 @@ export default function AdminPage() {
         <Tabs tabs={tabs} state={{ activeTab, setActiveTab }} />
       </div>
       <Separator orientation="vertical" className="h-auto" />
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-1 p-12">
         <button>Click me</button>
+
+        <ProductsTable />
       </div>
     </div>
   );
