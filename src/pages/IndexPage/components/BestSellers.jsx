@@ -27,7 +27,7 @@ export default function BestSellers() {
           The most wanted products, ready to be shipped to 47 different
           countries, including yours.
         </p>
-        <Link to={"/"}>
+        <Link to={"/products"}>
           <Button className={"bg-mainBlack w-fit"}>
             See More <FaArrowRightLong className="ml-2" />
           </Button>{" "}
