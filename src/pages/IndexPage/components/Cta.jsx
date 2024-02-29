@@ -35,7 +35,7 @@ export default function Cta() {
       <div className="justify-end hidden lg:flex">
         <img
           src="/cta-image.png"
-          className="max-h-[400px]"
+          className="max-h-[400px] h-[1988px]"
           alt="Trendy product"
         />
       </div>
