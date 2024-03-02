@@ -99,7 +99,7 @@ export default function Template() {
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className="hidden sm:block">
               <Input
                 id="query-navbar"
                 name="query"
