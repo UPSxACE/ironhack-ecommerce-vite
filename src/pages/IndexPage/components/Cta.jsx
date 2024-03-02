@@ -1,4 +1,4 @@
-import { IoSearch } from "react-icons/io5";
+import CtaSearchBar from "./CtaSearchBar";
 
 export default function Cta() {
   return (
@@ -21,21 +21,12 @@ export default function Cta() {
             <span className="text-md sm:text-xl">Shipped Products</span>
           </article>
         </div>
-        <div className="bg-white border border-gray-400 h-[3rem] sm:h-[3.75rem] rounded-xl text-black py-2 px-2 flex">
-          <input
-            type="text"
-            className="min-w-[100px] h-full flex-1 pr-3 outline-none text-lg sm:text-xl"
-            placeholder="What are you looking for?"
-          />
-          <div className="h-[2rem] w-[2rem] sm:h-[2.75rem] sm:w-[2.75rem] p-[0.4rem] bg-mainBlack rounded-xl">
-            <IoSearch className="h-full w-full  fill-white" />
-          </div>
-        </div>
+        <CtaSearchBar />
       </div>
       <div className="justify-end hidden lg:flex">
         <img
           src="/cta-image.png"
-          className="max-h-[400px]"
+          className="max-h-[400px] h-[1988px]"
           alt="Trendy product"
         />
       </div>

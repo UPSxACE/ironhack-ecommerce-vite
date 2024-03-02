@@ -4,6 +4,7 @@ import useOverlay from "@/components/ScreenOverlay/use-screen-overlay";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import { Form, useLoaderData } from "react-router-dom";
+import ProductsTable from "./components/ProductsTable";
 import Tabs from "./components/Tabs";
 import FormAdmin from "./components/FormAdmin";
 
@@ -21,6 +22,10 @@ export default function AdminPage() {
     }, 300);
   }, []);
 
+  const dataUrl = `products?userId=${
+    import.meta.env.VITE_STORE_OWNER_ID
+  }&categoryId=${activeTab + 1}&_embed=rates&_sort=id&_order=asc`;
+
   return (
     <div className="min-h-screen flex items-stretch">
       <ScreenOverlay {...overlay} notCloseable>
@@ -36,8 +41,9 @@ export default function AdminPage() {
         <Tabs tabs={tabs} state={{ activeTab, setActiveTab }} />
       </div>
       <Separator orientation="vertical" className="h-auto" />
-      <div className="flex flex-col">
+      <div className="flex flex-col flex-1 p-12">
         <button>Click me</button>
+        <ProductsTable dataUrl={dataUrl} />
       </div>
       <FormAdmin/>
 

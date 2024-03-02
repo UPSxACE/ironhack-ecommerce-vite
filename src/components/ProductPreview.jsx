@@ -22,7 +22,7 @@ export default function ProductPreview({
             className={"w-full h-full object-cover " + imageClass}
           />
         </div>
-        <h1 className="font-medium mt-2">{title}</h1>
+        <h1 className="font-medium mt-2 line-clamp-1">{title}</h1>
         <span className="text-red-600 font-medium">${price}</span>
         <div className="flex gap-2 flex-wrap">
           <StaticRating rating={rating} />

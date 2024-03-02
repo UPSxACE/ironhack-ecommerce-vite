@@ -40,7 +40,8 @@ export default function useGetRequest(route, queryParams) {
 
     axios
       .get(
-        "http://localhost:3000/" +
+        import.meta.env.VITE_API_URL +
+          "/" +
           routeFixed +
           buildQueryParamsString(queryParamsRef.current),
         config

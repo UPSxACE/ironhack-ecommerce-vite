@@ -2,40 +2,25 @@ import ProductPreview from "@/components/ProductPreview";
 import useGetRequest from "@/hooks/use-get-request";
 import { useParams } from "react-router-dom";
 
-const categories = {
-  1: "Cellphones",
-  2: "Monitors",
-  3: "Gaming",
-  4: "Accessories",
-};
-
-function ProductsCategoryPage() {
-  const { id } = useParams();
-
+export default function SearchPage() {
+  const { query } = useParams();
   const {
     done,
     error,
-    result: categoryProducts,
-  } = useGetRequest(`products`, {
+    result: products,
+  } = useGetRequest("/products", {
+    userId: import.meta.env.VITE_STORE_OWNER_ID,
     _embed: "rates",
-    categoryId: id,
+    q: query,
   });
 
-  if (!done) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error!</div>;
-  }
-
   return (
-    <div className="flex flex-col gap-3">
-      <div className="flex justify-between">
-        <h1 className="font-bold text-lg">{categories[id]}</h1>
-      </div>
-      <div className="flex flex-wrap justify-between gap-3">
-        {categoryProducts?.map((product, index) => {
+    <div className="flex flex-col gap-y-4">
+      <h1 className="text-2xl">
+        <strong className="font-bold">Searching for:</strong> {query}
+      </h1>
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {products?.map((product, index) => {
           const rateCount = product?.rates ? product.rates.length : 0;
           const rateSum =
             rateCount > 0
@@ -55,6 +40,9 @@ function ProductsCategoryPage() {
               price={product.price}
               rating={rateAverage}
               ratingCount={rateCount}
+              linkClass={"w-full"}
+              articleClass={"w-full"}
+              imageWrapperClass={"w-full"}
             />
           );
         })}
@@ -62,5 +50,3 @@ function ProductsCategoryPage() {
     </div>
   );
 }
-
-export default ProductsCategoryPage;
