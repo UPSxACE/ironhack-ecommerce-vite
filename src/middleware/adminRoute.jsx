@@ -19,7 +19,9 @@ export default async function adminRoute() {
 
   await axios
     .get(
-      "http://localhost:3000/users/" + import.meta.env.VITE_STORE_OWNER_ID,
+      import.meta.env.VITE_API_URL +
+        "/users/" +
+        import.meta.env.VITE_STORE_OWNER_ID,
       config
     )
     .then((res) => {

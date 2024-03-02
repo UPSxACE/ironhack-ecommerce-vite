@@ -8,7 +8,7 @@ export default async function postRequest(route, body) {
   const routeFixed = route.startsWith("/") ? route.slice(1) : route;
 
   await axios
-    .post("http://localhost:3000/" + routeFixed, body)
+    .post(import.meta.env.VITE_API_URL + "/" + routeFixed, body)
     .then((res) => {
       result = res.data;
     })
