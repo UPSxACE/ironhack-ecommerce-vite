@@ -1,12 +1,22 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import clsx from "clsx";
+import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
+import { Input } from "./ui/input";
 
 export default function Template() {
-  const [loggedIn, setLoggedin] = useState(Boolean(localStorage.getItem("accessToken")));
+  const [loggedIn, setLoggedin] = useState(
+    Boolean(localStorage.getItem("accessToken"))
+  );
 
   const location = useLocation();
   useEffect(() => {
@@ -14,9 +24,24 @@ export default function Template() {
   }, [location]);
 
   function activeClass({ isActive, isPending }) {
-    return isPending ? "pending p-2" : isActive ? "underline underline-offset-2 p-2" : "p-2";
+    return isPending
+      ? "pending p-2"
+      : isActive
+      ? "underline underline-offset-2 p-2"
+      : "p-2";
   }
-  
+
+  const navigate = useNavigate();
+
+  function onSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const query = formData.get("query");
+    navigate("/search/" + query);
+  }
+
+  const isInHomepage = location.pathname === "/";
+
   return (
     <div>
       <header className="flex justify-center border-b px-4 sm:px-6 md:px-12">
@@ -74,6 +99,18 @@ export default function Template() {
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
+            <form onSubmit={onSubmit}>
+              <Input
+                id="query-navbar"
+                name="query"
+                type="text"
+                placeholder="Search product"
+                className={clsx(
+                  "transition-all duration-1000",
+                  isInHomepage ? "w-0 border-transparent" : "w-[180px]"
+                )}
+              />
+            </form>
             <Link to="/" className="p-2">
               <IoHeartOutline></IoHeartOutline>
             </Link>

@@ -6,10 +6,12 @@ import adminRoute from "./middleware/adminRoute";
 import guestRoute from "./middleware/guestRoute";
 import logout from "./middleware/logout";
 import AdminPage from "./pages/AdminPage";
+import CartPage from "./pages/CartPage";
 import IndexPage from "./pages/IndexPage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ProductsCategoryPage from "./pages/ProductsCategoryPage";
 import ProductsPage from "./pages/ProductsPage";
+import SearchPage from "./pages/SearchPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 
@@ -46,8 +48,16 @@ const router = createBrowserRouter([
       },
       {
         path: "products/:id",
-        element: <ProductsCategoryPage />
-      }
+        element: <ProductsCategoryPage />,
+      },
+      {
+        path: "cart",
+        element: <CartPage />,
+      },
+      {
+        path: "search/:query",
+        element: <SearchPage />,
+      },
     ],
   },
   {
