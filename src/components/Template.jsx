@@ -99,7 +99,7 @@ export default function Template() {
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
-            <form onSubmit={onSubmit} className="hidden sm:block">
+            <form onSubmit={onSubmit} className="hidden md:block">
               <Input
                 id="query-navbar"
                 name="query"
@@ -114,7 +114,7 @@ export default function Template() {
             <Link to="/" className="p-2">
               <IoHeartOutline></IoHeartOutline>
             </Link>
-            <Link to="/" className="p-2">
+            <Link to="/cart" className="p-2">
               <PiShoppingCartThin></PiShoppingCartThin>
             </Link>
           </div>
