@@ -3,9 +3,10 @@ import ScreenOverlay from "@/components/ScreenOverlay";
 import useOverlay from "@/components/ScreenOverlay/use-screen-overlay";
 import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import ProductsTable from "./components/ProductsTable";
 import Tabs from "./components/Tabs";
+import FormAdmin from "./components/FormAdmin";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -44,6 +45,8 @@ export default function AdminPage() {
         <button>Click me</button>
         <ProductsTable dataUrl={dataUrl} />
       </div>
+      <FormAdmin/>
+
     </div>
   );
 }
