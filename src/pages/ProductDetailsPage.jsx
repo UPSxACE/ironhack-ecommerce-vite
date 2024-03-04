@@ -9,6 +9,16 @@ import { HiOutlineArrowPath } from "react-icons/hi2";
 import { TbTruckDelivery } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 
+function calculateInitialState(id) {
+  const favoritesStrArrLocalStorage = localStorage.getItem("favorites"); // ['2'] or null
+
+  if (favoritesStrArrLocalStorage === null) {
+    return false;
+  } else {
+    return JSON.parse(favoritesStrArrLocalStorage.includes(id));
+  }
+}
+
 export default function ProductDetailsPage() {
   const { id } = useParams();
 
@@ -21,13 +31,52 @@ export default function ProductDetailsPage() {
     _expand: "category",
   });
 
-  const [favorite, setFavorite] = useState(false);
+  const [favorited, setFavorited] = useState(calculateInitialState(id));
 
   const categoryName = (done && product?.category?.name) || "";
 
   const rateCount = product?.rates ? product.rates.length : 0;
   const rateSum = rateCount > 0 ? product.rates.reduce((accRate, currRate) => accRate + currRate.rating, 0) : 0;
   const rateAverage = Math.floor(rateSum / rateCount);
+
+  function unfavorite() {
+    let currentValue = localStorage.getItem("favorites");
+
+    if (currentValue === null) {
+      currentValue = "[]";
+    }
+
+    const currentValueArr = JSON.parse(currentValue);
+    const currentValueIndex = currentValueArr.indexOf(id);
+    if(currentValueIndex === -1){
+      setFavorited(false);
+    } else {
+      // remove it
+      currentValueArr.splice(currentValueIndex, 1)
+
+      const newValue = JSON.stringify(currentValueArr)
+      localStorage.setItem('favorites', newValue)
+      setFavorited(false)
+      
+    }
+
+  }
+
+  function favorite() {
+    let currentValue = localStorage.getItem("favorites");
+
+    if (currentValue === null) {
+      currentValue = "[]";
+    }
+
+    const currentValueArr = JSON.parse(currentValue);
+    currentValueArr.push(id);
+
+    const newValue = JSON.stringify(currentValueArr);
+
+    localStorage.setItem("favorites", newValue);
+    setFavorited(true);
+  }
 
   return (
     <div>
@@ -48,12 +97,12 @@ export default function ProductDetailsPage() {
           <div className="flex gap-2 flex-wrap justify-center">
             <NumberInput className="w-full shrink-0 basis-full xs:basis-0" />
             <Button className="flex-1 bg-mainBlack">Add to Cart</Button>
-            {favorite ? (
-              <Button className={"flex-1 border border-red-600 xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={() => setFavorite(!favorite)}>
+            {favorited ? (
+              <Button className={"flex-1 border border-red-600 xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={unfavorite}>
                 <HeartIcon fill={"red"} color="red" />
               </Button>
             ) : (
-              <Button className={"flex-1 border border-mainBlack xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={() => setFavorite(!favorite)}>
+              <Button className={"flex-1 border border-mainBlack xs:max-w-10 p-[0.6rem]"} variant="outline" onClick={favorite}>
                 <HeartIcon />
               </Button>
             )}
