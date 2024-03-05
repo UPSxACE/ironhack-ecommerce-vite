@@ -1,3 +1,6 @@
+import LoadingSpinner from "@/components/LoadingSpinner.jsx";
+import ScreenOverlay from "@/components/ScreenOverlay/index.jsx";
+import useScreenOverlay from "@/components/ScreenOverlay/use-screen-overlay.jsx";
 import { Button } from "@/components/ui/button.jsx";
 import {
   DropdownMenu,
@@ -23,16 +26,23 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import CreateForm from "./CreateForm.jsx";
 import { columns } from "./columns.jsx";
 
 export default function ProductsTable({ dataUrl }) {
+  const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
-
+  const overlay = useScreenOverlay(true);
   const { result, done, error } = useGetRequest(dataUrl);
-  const data = done && !error ? result : [];
+
+  useEffect(() => {
+    if (done && !error) {
+      setData(result);
+    }
+  }, [done, error, result]);
 
   const table = useReactTable({
     data,
@@ -50,11 +60,47 @@ export default function ProductsTable({ dataUrl }) {
       columnFilters,
       columnVisibility,
     },
+    meta: {
+      updateData: (rowIndex, value) => {
+        setData((old) =>
+          old.map((row, index) => {
+            const oldRowValue = old?.[rowIndex] || {};
+            if (index === rowIndex) {
+              return {
+                ...oldRowValue,
+                ...value,
+              };
+            }
+            return row;
+          })
+        );
+      },
+      deleteData: (rowIndex) => {
+        setData((old) => {
+          const newArr = [...old];
+          newArr.splice(rowIndex, 1);
+          return newArr;
+        });
+      },
+    },
   });
+
+  const overlayCloseRef = useRef(overlay.close);
+
+  useEffect(() => {
+    if (done) {
+      overlayCloseRef.current();
+    }
+  }, [done, overlayCloseRef]);
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 gap-2">
+        <ScreenOverlay {...overlay} notCloseable>
+          <div className="h-full w-full flex justify-center items-center">
+            <LoadingSpinner className="text-white border-[6px] h-[50px] w-[50px]" />
+          </div>
+        </ScreenOverlay>
         <Input
           placeholder="Filter products by title..."
           value={table.getColumn("title")?.getFilterValue() || ""}
@@ -63,9 +109,7 @@ export default function ProductsTable({ dataUrl }) {
           }
           className="max-w-sm"
         />
-        <Button variant="outline" className="ml-auto mr-2">
-          Create
-        </Button>
+        <CreateForm />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Columns</Button>

@@ -165,7 +165,7 @@ export default function CartPage() {
               </span>
               <label className="text-md font-bold">Order Total</label>
               <span className="text-md font-bold text-right text-lg">
-                ${summary.total.toFixed(2)}
+                ${summary.total > 21 ? summary.total.toFixed(2) : "0.00"}
               </span>
               <Button
                 className="col-span-2 rounded-full bg-mainBlack"
