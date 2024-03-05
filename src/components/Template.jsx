@@ -4,19 +4,14 @@ import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaInstagramSquare } from "react-icons/fa";
+import { FaTwitterSquare } from "react-icons/fa";
+import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Input } from "./ui/input";
 
 export default function Template() {
-  const [loggedIn, setLoggedin] = useState(
-    Boolean(localStorage.getItem("accessToken"))
-  );
+  const [loggedIn, setLoggedin] = useState(Boolean(localStorage.getItem("accessToken")));
 
   const location = useLocation();
   useEffect(() => {
@@ -24,11 +19,7 @@ export default function Template() {
   }, [location]);
 
   function activeClass({ isActive, isPending }) {
-    return isPending
-      ? "pending p-2"
-      : isActive
-      ? "underline underline-offset-2 p-2"
-      : "p-2";
+    return isPending ? "pending p-2" : isActive ? "underline underline-offset-2 p-2" : "p-2";
   }
 
   const navigate = useNavigate();
@@ -100,16 +91,7 @@ export default function Template() {
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
             <form onSubmit={onSubmit} className="hidden lg:block">
-              <Input
-                id="query-navbar"
-                name="query"
-                type="text"
-                placeholder="Search product"
-                className={clsx(
-                  "transition-all duration-1000",
-                  isInHomepage ? "w-0 border-transparent" : "w-[180px]"
-                )}
-              />
+              <Input id="query-navbar" name="query" type="text" placeholder="Search product" className={clsx("transition-all duration-1000", isInHomepage ? "w-0 border-transparent" : "w-[180px]")} />
             </form>
             <Link to="/favourites" className="p-2">
               <IoHeartOutline></IoHeartOutline>
@@ -125,6 +107,27 @@ export default function Template() {
           <Outlet />
         </div>
       </div>
+      <footer className="p-4 py-6 bg-mainBlack text-white">
+        <div className="flex flex-col items-center gap-1">
+          <div className="flex gap-2 text-2xl">
+            <FaFacebookSquare />
+            <FaInstagramSquare />
+            <FaTwitterSquare />
+          </div>
+          <div className="flex gap-2">
+            <Link to="/">Home</Link>
+            <Link to="/products">Products</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
+          <div className="flex gap-2">
+            <span>Terms of Use</span>
+            <span>Privacy Policy</span>
+          </div>
+          <div>
+            <span>@2018 IronTech</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

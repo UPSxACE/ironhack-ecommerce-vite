@@ -15,6 +15,7 @@ import SearchPage from "./pages/SearchPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import FavouritesPage from "./pages/FavouritesPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
     element: <AdminPage />,
     loader: adminRoute,
   },
+  {
+    path: "*",
+    element: <NotFoundPage/>
+  }
 ]);
 
 function App() {  
