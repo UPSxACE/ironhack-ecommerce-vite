@@ -111,7 +111,7 @@ export default function Template() {
                 )}
               />
             </form>
-            <Link to="/" className="p-2">
+            <Link to="/favourites" className="p-2">
               <IoHeartOutline></IoHeartOutline>
             </Link>
             <Link to="/cart" className="p-2">
