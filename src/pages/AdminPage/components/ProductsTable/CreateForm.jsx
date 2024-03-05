@@ -34,7 +34,7 @@ export default function CreateForm() {
       price: Number(form.get("price")).toFixed(2),
       purchases: 0,
       userId: Number(import.meta.env.VITE_STORE_OWNER_ID),
-      image: "/products/product1.jpg", // FIXME
+      image: form.get("imageUrl"),
     };
 
     postRequest("/products", obj);
@@ -62,6 +62,17 @@ export default function CreateForm() {
               Title
             </Label>
             <Input id="title" name="title" className="col-span-3" required />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="imageUrl" className="text-right">
+              Image Url
+            </Label>
+            <Input
+              id="imageUrl"
+              name="imageUrl"
+              className="col-span-3"
+              required
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="categoryId" className="text-right">
@@ -103,7 +114,7 @@ export default function CreateForm() {
               name="price"
               type="number"
               className="col-span-3"
-              required
+              step="0.01"
             />
           </div>
         </form>
