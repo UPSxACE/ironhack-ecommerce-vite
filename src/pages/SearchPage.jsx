@@ -1,18 +1,30 @@
 import ProductPreview from "@/components/ProductPreview";
 import useGetRequest from "@/hooks/use-get-request";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function SearchPage() {
   const { query } = useParams();
+
   const {
     done,
     error,
     result: products,
+    updateParams,
   } = useGetRequest("/products", {
     userId: import.meta.env.VITE_STORE_OWNER_ID,
     _embed: "rates",
     q: query,
   });
+
+  useEffect(() => {
+    const obj = {
+      userId: import.meta.env.VITE_STORE_OWNER_ID,
+      _embed: "rates",
+      q: query,
+    };
+    updateParams(obj);
+  }, [query, updateParams]);
 
   return (
     <div className="flex flex-col gap-y-4">

@@ -5,7 +5,7 @@ export default function useGetRequest(route, queryParams) {
   const [done, setDone] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
-  const queryParamsRef = useRef(queryParams);
+  const [queryParamsRef, setQueryParamsRef] = useState(queryParams);
 
   useEffect(() => {
     const buildQueryParamsString = (params) => {
@@ -43,7 +43,7 @@ export default function useGetRequest(route, queryParams) {
         import.meta.env.VITE_API_URL +
           "/" +
           routeFixed +
-          buildQueryParamsString(queryParamsRef.current),
+          buildQueryParamsString(queryParamsRef),
         config
       )
       .then((res) => {
@@ -56,5 +56,12 @@ export default function useGetRequest(route, queryParams) {
       });
   }, [queryParamsRef, route]);
 
-  return { done, result, error };
+  const updateParamsRef = useRef((newParams) => setQueryParamsRef(newParams));
+
+  return {
+    done,
+    result,
+    error,
+    updateParams: updateParamsRef.current,
+  };
 }

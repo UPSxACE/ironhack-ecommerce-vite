@@ -55,6 +55,10 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "search/",
+        element: <SearchPage />,
+      },
+      {
         path: "search/:query",
         element: <SearchPage />,
       },
