@@ -9,6 +9,16 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { useParams } from "react-router-dom";
 import AddToCart from "./AddToCart";
 
+function calculateInitialState(id) {
+  const favoritesStrArrLocalStorage = localStorage.getItem("favorites"); // ['2'] or null
+
+  if (favoritesStrArrLocalStorage === null) {
+    return false;
+  } else {
+    return JSON.parse(favoritesStrArrLocalStorage.includes(id));
+  }
+}
+
 export default function ProductDetailsPage() {
   const { id } = useParams();
 
@@ -21,7 +31,7 @@ export default function ProductDetailsPage() {
     _expand: "category",
   });
 
-  const [favorite, setFavorite] = useState(false);
+  const [favorited, setFavorited] = useState(calculateInitialState(id));
 
   const categoryName = (done && product?.category?.name) || "";
 
@@ -34,6 +44,43 @@ export default function ProductDetailsPage() {
         )
       : 0;
   const rateAverage = Math.floor(rateSum / rateCount);
+
+  function unfavorite() {
+    let currentValue = localStorage.getItem("favorites");
+
+    if (currentValue === null) {
+      currentValue = "[]";
+    }
+
+    const currentValueArr = JSON.parse(currentValue);
+    const currentValueIndex = currentValueArr.indexOf(id);
+    if (currentValueIndex === -1) {
+      setFavorited(false);
+    } else {
+      // remove it
+      currentValueArr.splice(currentValueIndex, 1);
+
+      const newValue = JSON.stringify(currentValueArr);
+      localStorage.setItem("favorites", newValue);
+      setFavorited(false);
+    }
+  }
+
+  function favorite() {
+    let currentValue = localStorage.getItem("favorites");
+
+    if (currentValue === null) {
+      currentValue = "[]";
+    }
+
+    const currentValueArr = JSON.parse(currentValue);
+    currentValueArr.push(id);
+
+    const newValue = JSON.stringify(currentValueArr);
+
+    localStorage.setItem("favorites", newValue);
+    setFavorited(true);
+  }
 
   return (
     <div>
@@ -68,13 +115,13 @@ export default function ProductDetailsPage() {
           <hr className="border-black" />
           <div className="flex gap-2 flex-wrap justify-center">
             <AddToCart productId={id} />
-            {favorite ? (
+            {favorited ? (
               <Button
                 className={
                   "flex-1 border border-red-600 xs:max-w-10 p-[0.6rem]"
                 }
                 variant="outline"
-                onClick={() => setFavorite(!favorite)}
+                onClick={unfavorite}
               >
                 <HeartIcon fill={"red"} color="red" />
               </Button>
@@ -84,7 +131,7 @@ export default function ProductDetailsPage() {
                   "flex-1 border border-mainBlack xs:max-w-10 p-[0.6rem]"
                 }
                 variant="outline"
-                onClick={() => setFavorite(!favorite)}
+                onClick={favorite}
               >
                 <HeartIcon />
               </Button>
