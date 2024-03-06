@@ -91,7 +91,16 @@ export default function Template() {
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
             <form onSubmit={onSubmit} className="hidden lg:block">
-              <Input id="query-navbar" name="query" type="text" placeholder="Search product" className={clsx("transition-all duration-1000", isInHomepage ? "w-0 border-transparent" : "w-[180px]")} />
+              <Input
+                id="query-navbar"
+                name="query"
+                type="text"
+                placeholder="Search product"
+                className={clsx(
+                  "transition-all duration-1000",
+                  isInHomepage ? "w-0 border-transparent" : "w-[180px]"
+                )}
+              />
             </form>
             <Link to="/favourites" className="p-2">
               <IoHeartOutline></IoHeartOutline>
@@ -124,7 +133,7 @@ export default function Template() {
             <span>Privacy Policy</span>
           </div>
           <div>
-            <span>@2018 IronTech</span>
+            <span>@2024 IronTech</span>
           </div>
         </div>
       </footer>
