@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 // import Button from "../../../components/Button";
 import ProductPreview from "@/components/ProductPreview";
+import ProductPreviewSkeleton from "@/components/ProductPreviewSkeleton";
 import { Button } from "@/components/ui/button";
 import useGetRequest from "@/hooks/use-get-request";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -35,7 +36,17 @@ export default function BestSellers() {
         {/* <Button Icon={FaArrowRightLong}>See more</Button> */}
       </article>
 
-      <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-4 flex-wrap lg:flex-nowrap justify-around lg:justify-between">
+      <div className="flex mt-8 lg:mt-0 gap-12 lg:gap-4 flex-wrap lg:flex-nowrap justify-around lg:justify-between w-full">
+        {(!done || error) &&
+          [1, 2, 3].map((x) => {
+            return (
+              <ProductPreviewSkeleton
+                articleClass={"max-sm:w-full max-sm:h-auto"}
+                imageWrapperClass={"max-sm:w-full max-h-[320px]"}
+                key={x}
+              />
+            );
+          })}
         {done &&
           !error &&
           products.map((product) => {
@@ -60,7 +71,7 @@ export default function BestSellers() {
                 ratingCount={rateCount}
                 linkClass={"max-sm:w-full max-sm:h-auto"}
                 articleClass={"max-sm:w-full max-sm:h-auto"}
-                imageWrapperClass={"w-full h-auto"}
+                imageWrapperClass={"w-full w-full"}
                 imageClass={"max-h-[320px]"}
               />
             );

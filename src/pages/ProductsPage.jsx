@@ -1,4 +1,5 @@
 import ProductPreview from "@/components/ProductPreview";
+import ProductPreviewSkeleton from "@/components/ProductPreviewSkeleton";
 import { Button } from "@/components/ui/button";
 import useGetRequest from "@/hooks/use-get-request";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ function ProductsPage() {
   const queryParams = (categoryId) => ({
     userId: import.meta.env.VITE_STORE_OWNER_ID,
     _embed: "rates",
+    _limit: 4,
     categoryId,
   });
 
@@ -37,29 +39,35 @@ function ProductsPage() {
               </Button>
             </div>
             <div className="flex gap-3 justify-between flex-wrap lg:flex-nowrap">
-              {products?.slice(0, 4).map((product, index) => {
-                const rateCount = product?.rates ? product.rates.length : 0;
-                const rateSum =
-                  rateCount > 0
-                    ? product.rates.reduce(
-                        (accRate, currRate) => accRate + currRate.rating,
-                        0
-                      )
-                    : 0;
-                const rateAverage = Math.floor(rateSum / rateCount);
+              {(!done || error) &&
+                [1, 2, 3, 4].map((x) => {
+                  return <ProductPreviewSkeleton key={x} />;
+                })}
+              {done &&
+                !error &&
+                products?.map((product, index) => {
+                  const rateCount = product?.rates ? product.rates.length : 0;
+                  const rateSum =
+                    rateCount > 0
+                      ? product.rates.reduce(
+                          (accRate, currRate) => accRate + currRate.rating,
+                          0
+                        )
+                      : 0;
+                  const rateAverage = Math.floor(rateSum / rateCount);
 
-                return (
-                  <ProductPreview
-                    key={index}
-                    id={product.id}
-                    imageUrl={product.image}
-                    title={product.title}
-                    price={product.price}
-                    rating={rateAverage}
-                    ratingCount={rateCount}
-                  />
-                );
-              })}
+                  return (
+                    <ProductPreview
+                      key={index}
+                      id={product.id}
+                      imageUrl={product.image}
+                      title={product.title}
+                      price={product.price}
+                      rating={rateAverage}
+                      ratingCount={rateCount}
+                    />
+                  );
+                })}
             </div>
           </div>
         );

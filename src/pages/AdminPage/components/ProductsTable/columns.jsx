@@ -1,8 +1,21 @@
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
+import deleteRequest from "@/utils/delete-request";
 import { ArrowUpDown } from "lucide-react";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { HiOutlinePencilAlt } from "react-icons/hi";
 import { LuEye } from "react-icons/lu";
+import { Link } from "react-router-dom";
+import EditForm from "./EditForm";
 
 export const columns = [
   {
@@ -65,18 +78,52 @@ export const columns = [
   {
     accessorKey: "actions",
     header: "Actions",
-    cell: ({ row }) => {
+    cell: ({ row: { getValue, index }, table }) => {
+      const productId = getValue("id");
+
+      const editRow = (newValue) => {
+        table.options.meta?.updateData(index, newValue);
+      };
+
+      const deleteRow = () => table.options.meta?.deleteData(index);
+
+      const deleteProduct = async () => {
+        await deleteRequest("/products/" + productId);
+        deleteRow();
+      };
+
       return (
         <div className="font-medium flex gap-2">
-          <Button variant="outline" className="text-xl p-2">
-            <LuEye />
-          </Button>
-          <Button variant="outline" className="text-xl p-2">
-            <HiOutlinePencilAlt />
-          </Button>
-          <Button variant="outline" className="text-lg p-2">
-            <FaRegTrashAlt />
-          </Button>
+          <Link to={"/product/" + productId} target="_blank">
+            <Button variant="outline" className="text-xl p-2">
+              <LuEye />
+            </Button>
+          </Link>
+
+          <EditForm id={productId} editRow={editRow} />
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button variant="outline" className="text-lg p-2">
+                <FaRegTrashAlt />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This will permanently delete the
+                  product and remove the data from our servers.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={deleteProduct}>
+                  Continue
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       );
     },
