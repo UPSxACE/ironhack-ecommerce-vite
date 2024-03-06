@@ -56,7 +56,11 @@ export default function useGetRequest(route, queryParams) {
       });
   }, [queryParamsRef, route]);
 
-  const updateParamsRef = useRef((newParams) => setQueryParamsRef(newParams));
+  const updateParamsRef = useRef((newParams) => {
+    setDone(false);
+    setError(null);
+    setQueryParamsRef(newParams);
+  });
 
   return {
     done,

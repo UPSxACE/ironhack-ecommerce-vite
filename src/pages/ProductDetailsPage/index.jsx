@@ -1,6 +1,7 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StaticRating from "@/components/StaticRating/StaticRating";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import useGetRequest from "@/hooks/use-get-request";
 import { HeartIcon } from "lucide-react";
 import { useState } from "react";
@@ -98,9 +99,14 @@ export default function ProductDetailsPage() {
         />
         <article className="flex flex-col gap-4 sm:gap-5">
           <header className="flex flex-col gap-1">
-            <h1 className="text-2xl lg:text-4xl font-bold">
-              {product?.title || ""}
-            </h1>
+            {product?.title ? (
+              <h1 className="text-2xl lg:text-4xl font-bold">
+                {product.title}
+              </h1>
+            ) : (
+              <Skeleton className="h-8 lg:h-10" />
+            )}
+
             <div className="flex gap-2 flex-wrap">
               <StaticRating rating={rateAverage} />
               <span className="font-medium text-gray-500">
@@ -108,10 +114,18 @@ export default function ProductDetailsPage() {
               </span>
             </div>
             <span className="text-2xl lg:text-3xl">
-              ${product?.price || ""}
+              ${product?.price || "0.00"}
             </span>
           </header>
-          <p className="text-lg">{product?.description || ""}</p>
+          {product?.description ? (
+            <p className="text-lg">{product?.description || ""}</p>
+          ) : (
+            <div>
+              <Skeleton className="h-7" />
+              <Skeleton className="h-7" />
+              <Skeleton className="h-7" />
+            </div>
+          )}
           <hr className="border-black" />
           <div className="flex gap-2 flex-wrap justify-center">
             <AddToCart productId={id} />
