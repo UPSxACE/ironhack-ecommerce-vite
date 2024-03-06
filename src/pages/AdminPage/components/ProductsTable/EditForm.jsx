@@ -31,6 +31,7 @@ export default function EditForm({ id, editRow }) {
   const [ready, setReady] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
+    imgUrl: "",
     categoryId: "",
     description: "",
     price: "",
@@ -57,6 +58,7 @@ export default function EditForm({ id, editRow }) {
       setReady(true);
       setFormData({
         title: result?.title,
+        imgUrl: result?.image,
         description: result?.description,
         categoryId: result?.categoryId,
         price: result?.price,
@@ -70,11 +72,11 @@ export default function EditForm({ id, editRow }) {
     const obj = {
       categoryId: Number(formData.categoryId),
       title: formData.title,
+      image: formData.imgUrl,
       description: formData.description,
       price: Number(formData.price).toFixed(2),
       userId: Number(import.meta.env.VITE_STORE_OWNER_ID),
       purchases: previousData.purchases,
-      image: previousData.image,
     };
 
     editRow({
@@ -123,6 +125,21 @@ export default function EditForm({ id, editRow }) {
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="imgUrl" className="text-right">
+              Image Url
+            </Label>
+            <Input
+              value={formData.imgUrl}
+              onChange={updateField}
+              disabled={!ready}
+              id="imgUrl"
+              name="imgUrl"
+              type="text"
+              className="col-span-3"
+              required
+            />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4 w-full">
             <Label htmlFor="categoryId" className="text-right">
               Category
             </Label>
@@ -136,7 +153,7 @@ export default function EditForm({ id, editRow }) {
               }}
               required
             >
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>

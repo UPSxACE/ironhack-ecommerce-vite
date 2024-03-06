@@ -79,7 +79,7 @@ export default function CreateForm() {
               Category
             </Label>
             <Select id="categoryId" name="categoryId" required>
-              <SelectTrigger className="w-[180px]">
+              <SelectTrigger className="col-span-3">
                 <SelectValue placeholder="Select a category" />
               </SelectTrigger>
               <SelectContent>
