@@ -8,7 +8,7 @@ export default async function putRequest(route, body) {
   const routeFixed = route.startsWith("/") ? route.slice(1) : route;
 
   await axios
-    .put("http://localhost:3000/" + routeFixed, body, {
+    .put(import.meta.env.VITE_API_URL + "/" + routeFixed, body, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
       },
