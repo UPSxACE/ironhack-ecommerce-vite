@@ -92,7 +92,7 @@ export default function Template() {
                 </DropdownMenuItem>
               </NavLink>
               {loggedIn ? (
-                <NavLink to={"/sign-out"}>
+                <NavLink to={"/logout"}>
                   <DropdownMenuItem className={"hover:cursor-pointer"}>
                     <span>Sign Out</span>
                   </DropdownMenuItem>
