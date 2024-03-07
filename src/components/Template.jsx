@@ -2,16 +2,26 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { CiMenuBurger } from "react-icons/ci";
+import {
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaTwitterSquare,
+} from "react-icons/fa";
 import { IoHeartOutline } from "react-icons/io5";
 import { PiShoppingCartThin } from "react-icons/pi";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
-import { FaTwitterSquare } from "react-icons/fa";
-import { Link, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { Input } from "./ui/input";
 
 export default function Template() {
-  const [loggedIn, setLoggedin] = useState(Boolean(localStorage.getItem("accessToken")));
+  const [loggedIn, setLoggedin] = useState(
+    Boolean(localStorage.getItem("accessToken"))
+  );
 
   const location = useLocation();
   useEffect(() => {
@@ -19,7 +29,11 @@ export default function Template() {
   }, [location]);
 
   function activeClass({ isActive, isPending }) {
-    return isPending ? "pending p-2" : isActive ? "underline underline-offset-2 p-2" : "p-2";
+    return isPending
+      ? "pending p-2"
+      : isActive
+      ? "underline underline-offset-2 p-2"
+      : "p-2";
   }
 
   const navigate = useNavigate();
@@ -77,16 +91,26 @@ export default function Template() {
                   <span>Products</span>
                 </DropdownMenuItem>
               </NavLink>
-              <NavLink to={"/sign-in"}>
-                <DropdownMenuItem className={"hover:cursor-pointer"}>
-                  <span>Sign In</span>
-                </DropdownMenuItem>
-              </NavLink>
-              <NavLink to={"/sign-up"}>
-                <DropdownMenuItem className={"hover:cursor-pointer"}>
-                  <span>Sign Up</span>
-                </DropdownMenuItem>
-              </NavLink>
+              {loggedIn ? (
+                <NavLink to={"/sign-out"}>
+                  <DropdownMenuItem className={"hover:cursor-pointer"}>
+                    <span>Sign Out</span>
+                  </DropdownMenuItem>
+                </NavLink>
+              ) : (
+                <>
+                  <NavLink to={"/sign-in"}>
+                    <DropdownMenuItem className={"hover:cursor-pointer"}>
+                      <span>Sign In</span>
+                    </DropdownMenuItem>
+                  </NavLink>
+                  <NavLink to={"/sign-up"}>
+                    <DropdownMenuItem className={"hover:cursor-pointer"}>
+                      <span>Sign Up</span>
+                    </DropdownMenuItem>
+                  </NavLink>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
           <div className="flex gap-1 items-center text-xl">
