@@ -1,3 +1,4 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import getRequest from "@/utils/get-request";
@@ -17,6 +18,7 @@ function getCart() {
 export default function CartPage() {
   const [cartDetailed, setCartDetailed] = useState([]);
   const [submited, setSubmited] = useState(false);
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     async function fetchCartDetails() {
@@ -31,6 +33,7 @@ export default function CartPage() {
       }
 
       setCartDetailed(arrDetailedCartItems);
+      setDone(true);
     }
 
     fetchCartDetails();
@@ -177,7 +180,12 @@ export default function CartPage() {
           </article>
         </section>
         <section id="cart-items" className="flex flex-col gap-3 md:order-first">
-          {cartDetailed.length === 0 && (
+          {!done && (
+            <article className="h-[12.75rem] flex justify-center items-center bg-gray-100 rounded-lg text-gray-400 font-light select-none">
+              <LoadingSpinner />
+            </article>
+          )}
+          {done && cartDetailed.length === 0 && (
             <article className="h-[12.75rem] flex justify-center items-center bg-gray-100 rounded-lg text-gray-400 font-light select-none">
               Empty Cart
             </article>

@@ -65,6 +65,12 @@ function ProductsPage() {
                       price={product.price}
                       rating={rateAverage}
                       ratingCount={rateCount}
+                      linkClass={
+                        "max-lg:flex-1 max-sm:basis-full max-sm:max-w-full max-md:basis-[calc(50%-(0.75rem/2))] max-md:max-w-[calc(50%-(0.75rem/2))] max-lg:basis-[calc((100%/3)-(1.5rem/3))] max-lg:max-w-[calc((100%/3)-(1.5rem/3))] max-lg:h-auto"
+                      }
+                      articleClass={"max-lg:w-full max-sm:h-auto"}
+                      imageWrapperClass={"w-full w-full"}
+                      imageClass={"max-h-[320px]"}
                     />
                   );
                 })}
