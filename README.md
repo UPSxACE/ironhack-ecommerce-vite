@@ -31,7 +31,7 @@ We have not implemented the buying workflow as it was not a requirement for the 
 3. Install the dependencies with `npm install`
 4. Setup the `VITE_API_URL` environment variable with the __URL of the api__.
 5. Setup the `VITE_STORE_OWNER_ID` environment variable with the __id of the account of owner of the store__ (use __VITE_STORE_OWNER_ID=1__ for testing, or create your own account in the api first).
-6. Run the development server with `npm run dev`, or crrate the production build with `npm run build`.
+6. Run the development server with `npm run dev`, or create the production build with `npm run build`.
 
 # Team Members
 This was a group exercise that I completed with Ioannis Tourtouras.
